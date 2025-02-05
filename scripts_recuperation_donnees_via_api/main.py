@@ -119,6 +119,51 @@ def getRisquesFromAdress(text, path):
         progress_bar.update(len(data))
         file.write(data)
 
+def convert_unicode_text(text):
+    replacements = {
+        rf'\u00e9': 'e',  # é
+        rf'\u00e0': 'a',  # à
+        rf'\u00e7': 'c',  # ç
+        rf'\u00f4': 'o',  # ô
+        rf'\u00fb': 'u',  # û
+        rf'\u00eb': 'e',  # ë
+        rf'\u00ea': 'e',  # ê
+        rf'\u00e8': 'e',  # è
+        rf'\u00ee': 'i',  # î
+        rf'\u00b0': ' ',  # °
+        rf'\n': ' ',      # Preserve line breaks
+        rf'..': '.'      # 
+    }
+    for _ in range(10): 
+        for unicode_char, replacement in replacements.items():
+            text = text.replace(unicode_char, replacement)
+    return ''.join(char for char in text if ord(char) < 128)
+
+def pdf_to_json(file_path):
+    pdf_file = open(file_path, 'rb')
+    read_pdf = PyPDF2.PdfReader(pdf_file)
+    number_of_pages = len(read_pdf.pages)
+    document = {'text': ''}
+    for k in range(number_of_pages):
+        page = read_pdf.pages[k]
+        page_content = page.extract_text()
+        data = json.dumps(page_content)
+        data = convert_unicode_text(data)
+        document['text'] += ' ' + data
+    return document['text']
+
+def data_to_json(root_path):
+  files_to_merge = []
+  for path, _, files in os.walk(root_path):
+    for name in files:
+      if '.pdf' in name:
+        files_to_merge.append(os.path.join(path, name))
+  file_to_upload = []
+  for path in tqdm.tqdm(files_to_merge):
+    file_to_upload.append({'title': path,
+                           'text': pdf_to_json(path)})
+  json.dump(file_to_upload, open(os.path.join(root_path, 'data.json'), "w"))
+
 def main(address, path="./dist"):
   """
   Enchaînement des fonctions du script pour télécharger tous les fichiers d'urbanisme (PLU, Servitudes, SCOT)
@@ -130,11 +175,12 @@ def main(address, path="./dist"):
   print("Partitions to dowload: " + str(allPartitions))
   downloadAllArchivesFromPartitionList(allPartitions, path)
   getRisquesFromAdress(address, path)
+  data_to_json(path)
 
 if __name__ == "__main__":
   import argparse
   parser = argparse.ArgumentParser()
-  parser.add_argument("address")
+  parser.add_argument("address", nargs="?")
   args = parser.parse_args()
   if args.address:
     main(args.address)
