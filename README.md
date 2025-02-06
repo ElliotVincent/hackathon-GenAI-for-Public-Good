@@ -1,64 +1,34 @@
-# Hackathon GenAI for Public Good 🤖  
+# Hackathon GenAI for Public Good 🤖
 
-📙 **Retrouvez le Guide du participant en cliquant** [ici](https://alliance.numerique.gouv.fr/hackathon/participant-guide-fr/)  
+## urbAIn, l'assistant des agents municipaux pour l'instruction des demandes de permis de construire
 
-## 👩‍💻 Comment participer ?  
+#### 🛠 Track 2 : Cas d'Usage à Fort Impact avec des APIs
+Exploitez des APIs comme **Albert** pour concevoir des outils concrets pour l'administration publique.
 
-Pour participer au Hackathon, vous devez créer un dépôt public (vous pouvez par exemple partir d'un fork de ce dépôt).  
+### 📝 Informations à renseigner pour l’évaluation
 
-Votre dépôt servira pour l'évaluation de votre projet à l'issue du Hackathon !  
+##### Pertinence
+Les Plans Locaux d’Urbanisme sont touffus, un mixte de cartes et de réglements. À ces documents s'ajoutent les Servitudes d'Utilité Publique, les risques géoaturels, les réserves Natura 2000... Les agents publics doivent vérifier la concordance des demandes des usagers avec la réglementation **dans un temps limité**. Notre oiutil permet aux agents de gagner en efficacité pour respecter au mieux les délais **et** la réglementation.
 
-Bon courage 🔥 !  
+##### Impact
+Les résultats attendus sont un gain d'efficacité dans le traitement des demandes de permis de construire. Cela est mesurable en vérifiant l'évolution des délais de réponse lors de la soumission de demandes de permis de construire
 
----
+##### Faisabilité
+Les APIs sur lesquelles se base le MVP sont ouvertes, il est également possible à l'avenir de les utiliser de manière plus poussée pour récupérer des informations plus précises (notamment l'API du Géoportail de l'urbanisme)
 
-## 🚀 Rendu attendu  
-
-### 🎯 Sélectionnez votre Track  
-
-Votre projet doit s'inscrire dans l'un des **deux tracks** suivants :  
-
-#### 🧠 Track 1 : Algorithmes à Forte Valeur Ajoutée  
-Développez des algorithmes avancés pour relever des défis technologiques fondamentaux.  
-
-Exemples :  
-- 🎙 **Transcription vocale** : Amélioration du Speech-to-Text pour les langues sous-représentées.  
-- 🛰 **Analyse géospatiale** : IA pour la planification urbaine et la gestion des crises.  
-- 📄 **Numérisation de documents** : Amélioration de l'OCR pour les administrations.
-
-### 📝 Informations à renseigner pour l’évaluation  
-
-Merci de compléter ce README avec les éléments suivants : 
-
-##### 🏆 Critères d'évaluation  
-| Critère            | Description | Poids (%) |
-|--------------------|-------------|-----------|
-| 🎯 **Précision**  | Le modèle produit-il des résultats plus fiables et pertinents que les solutions actuelles ? | 25 |
-| ⚡ **Efficacité**  | L’utilisation des ressources informatiques est-elle optimisée sans compromettre la qualité ? | 25 |
-| 💧 **Durabilité**  | Le modèle est-il respectueux de l’environnement et économe en ressources ? | 25 |
-| 📊 **Utilisation des données** | Les données sont-elles intégrées de manière éthique et pertinente ? | 25 |
-
---- 
-
-#### 🛠 Track 2 : Cas d'Usage à Fort Impact avec des APIs  
-Exploitez des APIs comme **Albert** pour concevoir des outils concrets pour l'administration publique.  
-
-Exemples :  
-- 📝 **Automatisation administrative** : Génération automatique de documents et rapports.  
-- 🔍 **Analyse documentaire** : Recherche et résumé intelligent de textes.  
-- 🎯 **Prototypes sur mesure** : Solutions adaptées aux besoins spécifiques identifiés par les équipes.
-
-### 📝 Informations à renseigner pour l’évaluation  
-
-Merci de compléter ce README avec les éléments suivants :  
-
-##### 🏆 Critères d'évaluation  
-| Critère            | Description | Poids (%) |
-|--------------------|-------------|-----------|
-| 🎯 **Pertinence**  | La solution répond-elle à un défi clair du service public ? | 25 |
-| 📈 **Impact**      | Les résultats attendus sont-ils significatifs et mesurables ? | 25 |
-| 🔧 **Faisabilité** | L’implémentation du MVP est-elle réaliste ? | 25 |
-| 🌍 **Scalabilité** | La solution est-elle adaptable et conçue comme un bien commun numérique ? | 25 |
+##### Scalabitilité
+La solution est adaptable à chaque municipalité qui pourra charger ses propores doncuments dans le corpus d'*urbAIn*. Les APIs utilisées sont ouvertes et les fonctions facilement réutilisables avec notemment la mise en place d'un interface en ligne de commandes.
 
 ---
 
+### Principe d'urbAIn
+
+urbAIn est un agent conversationnel à destination des agents municipaux pour les assister dans l'instruction des demandes de permis de construire. L'ensemble des documents règlementaires associés à la demande (via sa localisation) (PLU, SCOT, servitudes, risques...) sont chargés dans le corpus afin d'aider à la navigation dans tous ces documents. Le but est de pointer vers les informations pertinentes par rapport à la demande de permis pour fluidifier la vérification du respect de la règlementation.
+
+### Dépendances techniques
+
+Après avoir extrait une adresse ou une parcelle via la demande de permis, nos scripts convertissent cette information en localistation géographique via les APIs de l'IGN, puis interrogent les API du Géoportail de l'urbanisme (mis en oeuvre par l'IGN) et Géorisques (mise en oeuvre par le BRGM) pour récupérer les informations et documents relatifs à la demande.
+
+Cet ensemble de documents est chargé en tant que corpus via l'API Albert, ce qui permettra à l'agent municipal d'avoir un accès simplifié à la base de connaissances.
+
+L'agent municipal pourra ensuite charger dans urbAIn la demande de permis de construire, et demander à urbAIn des références vers le corpus par rapport à la demande.
