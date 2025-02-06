@@ -25,7 +25,7 @@ La solution est adaptable à chaque municipalité qui pourra charger ses propore
 
 urbAIn est un agent conversationnel à destination des agents municipaux pour les assister dans l'instruction des demandes de permis de construire. L'ensemble des documents règlementaires associés à la demande (via sa localisation) (PLU, SCOT, servitudes, risques...) sont chargés dans le corpus afin d'aider à la navigation dans tous ces documents. Le but est de pointer vers les informations pertinentes par rapport à la demande de permis pour fluidifier la vérification du respect de la règlementation.
 
-### Dépendances techniques
+### Étapes de fonctionnement
 
 Après avoir extrait une adresse ou une parcelle via la demande de permis, nos scripts convertissent cette information en localistation géographique via les APIs de l'IGN, puis interrogent les API du Géoportail de l'urbanisme (mis en oeuvre par l'IGN) et Géorisques (mise en oeuvre par le BRGM) pour récupérer les informations et documents relatifs à la demande.
 
