@@ -7,16 +7,16 @@ Exploitez des APIs comme **Albert** pour concevoir des outils concrets pour l'ad
 
 ### 📝 Informations à renseigner pour l’évaluation
 
-##### Pertinence
+##### 🎯 Pertinence
 Les Plans Locaux d’Urbanisme sont touffus, un mixte de cartes et de réglements. À ces documents s'ajoutent les Servitudes d'Utilité Publique, les risques géonaturels, les réserves Natura 2000... Les agents publics doivent vérifier la concordance des demandes des usagers avec la réglementation **dans un temps limité**. Notre outil permet aux agents d'accéder plus rapidement aux données pertinentes pour respecter au mieux les délais **et** la réglementation.
 
-##### Impact
+##### 📈 Impact
 Les résultats attendus sont un gain d'efficacité dans le traitement des demandes de permis de construire. Cela est mesurable en vérifiant l'évolution des délais de réponse lors de la soumission de demandes de permis de construire.
 
-##### Faisabilité
+##### 🔧 Faisabilité
 Les APIs sur lesquelles se base le MVP sont ouvertes, il est également possible à l'avenir de les utiliser de manière plus poussée pour récupérer des informations plus précises (notamment l'API du Géoportail de l'urbanisme).
 
-##### Scalabitilité
+##### 🌍 Scalabitilité
 La solution est adaptable à chaque municipalité qui pourra charger ses propres documents dans le corpus d'*urbAIn*. Les APIs utilisées sont ouvertes et les fonctions facilement réutilisables avec notamment la mise en place d'un interface en ligne de commande.
 
 ---
